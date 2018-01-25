@@ -65,7 +65,8 @@ const store = new Vuex.Store({
             {name:'测试页面集合',icon:'ios-navigate', subMenus:[
                 {name:'首页'},
                 {name:'测试'},
-            ]}
+            ]},
+            {name:'目录2',icon:'ios-navigate', }
         ],
         activeMenu:'测试',
     },

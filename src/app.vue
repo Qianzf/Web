@@ -9,7 +9,7 @@
         border: 1px solid #d7dde4;
         background: #f5f7f9;
         position: relative;
-        max-width:1200px;
+        width:1200px;
         min-height:100px;
         margin: 11px auto;
         border-radius: 10px;
@@ -31,7 +31,7 @@
     }
     .layout-copy{
         text-align: center;
-        padding: 10px 0 20px;
+        padding: 0px 0 15px;
         color: #9ea7b4;
         position: relative;
         bottom: 0px;
@@ -61,7 +61,8 @@
         <Row type="flex">
             <Col span="5" class="layout-menu-left">
                 <Menu @on-select="openLink" :active-name="active" theme="dark" width="auto" :open-names="getOpenMenus">
-                    <div class="layout-logo-left">{{title}}</div>
+                    <div class="layout-logo-left"><Icon type="android-color-palette"></Icon> {{title}}</div>
+                    <MenuItem name="首页"><Icon type="home"></Icon> 首页</MenuItem>
                     <Submenu :name="menu.name" :key="index" v-for="(menu,index) in menus">
                         <template slot="title">
                             <Icon :type="menu.icon"></Icon>
@@ -91,7 +92,7 @@
     export default {
         data() {
             return {
-                title:"SCH SYSTEM",
+                title:"SCH",
                 copyright:"2016-2018 &copy; SCH SYSTEM.",
                 menus:null,
             };
