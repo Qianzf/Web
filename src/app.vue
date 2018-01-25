@@ -127,7 +127,7 @@
             },
 
             active(){
-                console.log(this.$store.getters.activeMenu);
+                
                 return this.$store.getters.activeMenu;
             }
         },

@@ -44,6 +44,8 @@ router.beforeEach((to, from, next) => {
     Util.title(to.meta.title);
     // 根据名称设定初始菜单
     store.commit('setActiveMenu', to.name);
+    // 更新导航
+    store.commit('updateLink', to.name);
     next();
 });
 
@@ -56,7 +58,7 @@ router.afterEach(() => {
 const store = new Vuex.Store({
     state: {
         pagelink:[
-            {name:'首页',link:'#'},
+            {name:'测试页面集合',link:'#'},
             {name:'测试',link:'#'},
         ],
         menus:[
@@ -80,14 +82,14 @@ const store = new Vuex.Store({
     },
     mutations: {
         pushLink(state, newLink){
-            state.pagelink.push(newLink);
+            state.pagelink.push({name:newLink,link:'#'});
         },
         popLink(state){
             state.pagelink.pop();
         },
         updateLink(state, newLink){
-            state.pagelink.push(newLink);
             state.pagelink.pop();
+            state.pagelink.push({name:newLink,link:'#'});
         },
         setActiveMenu(state, menuName){
             state.activeMenu = menuName;
