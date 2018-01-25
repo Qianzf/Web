@@ -34,7 +34,7 @@
         <Row type="flex" justify="center" align="middle">
             <Col span="24">
                 <h1>
-                    页面112345
+                   页面2
                 </h1>
                 <h2>
                     <p>Welcome to your iView app!</p>
@@ -52,11 +52,7 @@
                     title: 'Bravo',
                     content: 'Now, enjoy the convenience of iView.'
                 });
-            },
-            
-        },
-        mounted() {
-            console.log(this.$route);
-        },
+            }
+        }
     };
 </script>

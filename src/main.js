@@ -42,6 +42,8 @@ const router = new VueRouter(RouterConfig);
 router.beforeEach((to, from, next) => {
     iView.LoadingBar.start();
     Util.title(to.meta.title);
+    // 根据名称设定初始菜单
+    store.commit('setActiveMenu', to.name);
     next();
 });
 
@@ -53,13 +55,43 @@ router.afterEach(() => {
 
 const store = new Vuex.Store({
     state: {
-
+        pagelink:[
+            {name:'首页',link:'#'},
+            {name:'测试',link:'#'},
+        ],
+        menus:[
+            {name:'测试页面集合',icon:'ios-navigate', subMenus:[
+                {name:'首页'},
+                {name:'测试'},
+            ]}
+        ],
+        activeMenu:'测试',
     },
     getters: {
-
+        pagelinks:(state)=>{
+            return state.pagelink;
+        },
+        menus:(state)=>{
+            return state.menus;
+        },
+        activeMenu:(state)=>{
+            return state.activeMenu;
+        }
     },
     mutations: {
-
+        pushLink(state, newLink){
+            state.pagelink.push(newLink);
+        },
+        popLink(state){
+            state.pagelink.pop();
+        },
+        updateLink(state, newLink){
+            state.pagelink.push(newLink);
+            state.pagelink.pop();
+        },
+        setActiveMenu(state, menuName){
+            state.activeMenu = menuName;
+        }
     },
     actions: {
 
