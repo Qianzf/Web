@@ -16,8 +16,9 @@
         min-height: 580px;
         margin: 10px;
         overflow: auto;
-        background: #fff;
+        background: #F5F7F9;
         border-radius: 4px;
+        overflow: hidden;
     }
     .layout-content-main{
         padding: 10px;
