@@ -83,6 +83,16 @@
         right: 16px;
         top: -1px;
     }
+    .time {
+        display: inline-block;
+        font-size: 16px;
+        position: relative;
+        top: -3px;
+        left: 0px;
+        letter-spacing: 1px;
+        font-family: Verdana;
+        color: #5B6270;
+    }
     .no-width{
         width:0 !important;
         overflow: hidden;
@@ -108,6 +118,7 @@
             <Col :span="contentSpan">
                 <div class="layout-header">
                     <Icon @click.native="collapsedSider" :class="rotateIcon"  type="ios-arrow-back" size="24"></Icon>
+                    <span class="time">{{hour}}<span :style="secFlag?'visibility: visible;':'visibility: hidden;'" >:</span>{{minute}}</span>
                     <span class="right-icons">
                         <Icon type="person"></Icon>
                         <span class="name">超级管理员</span>
@@ -139,10 +150,13 @@
                 isCollapsed:false,
                 sideSpan:5,
                 contentSpan:19,
+                hour:0,
+                minute:0,
+                sec:0
             };
         },
         mounted() {
-           
+            
         },
         beforeDestroy() {
 
@@ -156,6 +170,13 @@
                 this.isCollapsed = !this.isCollapsed;
                 this.sideSpan = this.sideSpan == 5 ? 0 : 5;
                 this.contentSpan = this.contentSpan == 19 ? 24 : 19;
+            },
+            updateTime(){
+                var that = this;
+                var time = new Date();
+                that.hour = time.getHours() > 9 ? time.getHours() : '0' + time.getHours();
+                that.minute = time.getMinutes() > 9 ? time.getMinutes() : '0' + time.getMinutes();
+                that.sec = time.getSeconds();
             }
         },
         computed: {
@@ -185,10 +206,18 @@
             active(){
                 
                 return this.$store.getters.activeMenu;
+            },
+            secFlag() {
+                return (this.sec % 2 == 0);
             }
         },
         created () {
             this.menus = this.$store.getters.menus;
+            var that = this;
+            that.updateTime();
+            setInterval(function(){
+                that.updateTime();
+            },1000);
         }
     };
 </script>
