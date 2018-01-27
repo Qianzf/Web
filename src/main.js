@@ -6,6 +6,7 @@ import Vuex from 'vuex';
 import Util from './libs/util';
 import App from './app.vue';
 import 'iview/dist/styles/iview.css';
+import './css/base.css';
 
 import VueI18n from 'vue-i18n';
 import Locales from './locale';
@@ -54,6 +55,18 @@ router.afterEach(() => {
     window.scrollTo(0, 0);
 });
 
+const menus = [
+    {name:'基本信息',icon:'ios-navigate', subMenus:[
+        {name:'系统状态'},
+        {name:'个人信息'},
+        {name:'我的消息'},
+    ]},
+    {name:'数据信息',icon:'ios-navigate', subMenus:[
+        {name:'发布文章'},
+        {name:'文章管理'},
+    ]}
+];
+
 
 const store = new Vuex.Store({
     state: {
@@ -61,14 +74,8 @@ const store = new Vuex.Store({
             {name:'测试页面集合',link:'#'},
             {name:'测试',link:'#'},
         ],
-        menus:[
-            {name:'测试页面集合',icon:'ios-navigate', subMenus:[
-                {name:'首页'},
-                {name:'测试'},
-            ]},
-            {name:'目录2',icon:'ios-navigate', }
-        ],
-        activeMenu:'测试',
+        menus:menus,
+        activeMenu:'',
     },
     getters: {
         pagelinks:(state)=>{
