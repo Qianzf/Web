@@ -118,7 +118,11 @@
             <Col :span="contentSpan">
                 <div class="layout-header">
                     <Icon @click.native="collapsedSider" :class="rotateIcon"  type="ios-arrow-back" size="24"></Icon>
-                    <span class="time">{{hour}}<span :style="secFlag?'visibility: visible;':'visibility: hidden;'" >:</span>{{minute}}</span>
+                    <span class="time">
+                        
+                        
+                        
+                        {{hour}}<span :style="secFlag?'visibility: visible;':'visibility: hidden;'" >:</span>{{minute}}</span>
                     <span class="right-icons">
                         <Icon type="person"></Icon>
                         <span class="name">超级管理员</span>

@@ -3,3 +3,9 @@ body{
     height: 100%;
     background-image: url("../img/bg.gif") !important;
 }
+
+/*** 设置每行间隔 ***/
+.ivu-row {
+    margin-bottom: 11px;
+}
+
