@@ -93,12 +93,29 @@
     }
     .time {
         display: inline-block;
-        font-size: 16px;
+        font-size: 14px;
         position: relative;
         top: -3px;
         left: 0px;
         font-family: Verdana;
-        color: #5B6270;
+        color: #FAFAFA;
+        background: #464C5B;
+        padding: 2px 6px;
+        border-radius: 4px;
+    }
+    .place {
+        display: inline-block;
+        font-size: 14px;
+        position: relative;
+        top: -3px;
+        left: 0px;
+        color: #DEB887;
+        margin-left: 10px;
+    }
+    .place .location {
+        margin: 0 5px 0 15px!important;
+        position: relative;
+        font-size: 16px !important;
     }
     .no-width{
         width:0 !important;
@@ -130,7 +147,10 @@
                 <div class="layout-header">
                     <Icon @click.native="collapsedSider" :class="rotateIcon"  type="ios-arrow-back" size="24"></Icon>
                     <span class="time">
-                        {{hour}}<span :style="secFlag?'visibility: visible;':'visibility: hidden;'" >:</span>{{minute}}</span>
+                        {{hour}}<span :style="secFlag?'visibility: visible;':'visibility: hidden;'" >:</span>{{minute}} </span>
+                    <span class="place" v-if="city != ''">
+                        <Icon class="location" type="location"></Icon> {{city}}
+                    </span>
                     <span class="right-icons">
                         <Dropdown>
                             <Icon type="person"></Icon>
@@ -232,7 +252,7 @@
                 that.sec = time.getSeconds();
             },
             getLocation(){
-               
+                var that = this;
                 var url = "/api/iplookup/iplookup.php?format=js";
                 this.$http.get(url)
                 .then(function (response) {
@@ -241,6 +261,7 @@
                     var remote_ip_info = JSON.parse(str);
                     // 当前城市
                     console.log(remote_ip_info.city);
+                    that.city = remote_ip_info.city;
                 })
                 .catch(function (error) {
                     console.log(error);

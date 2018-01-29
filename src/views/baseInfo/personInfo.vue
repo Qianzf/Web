@@ -3,7 +3,6 @@
         width: 100%;
         margin: 0 auto;
         border-radius: 4px;
-        padding: 15px;
         min-height: 580px;
     }
     .name-p {

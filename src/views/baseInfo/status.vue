@@ -162,5 +162,8 @@
             console.log(echarts);
 
         },
+        beforeCreate(){
+            
+        }
     };
 </script>

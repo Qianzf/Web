@@ -68,6 +68,7 @@ const menus = [
     {name:'博客管理',icon:'ios-navigate', subMenus:[
         {name:'发布文章'},
         {name:'文章管理'},
+        {name:'文章分类'},
     ]},
     {name:'采集数据',icon:'ios-navigate', subMenus:[
         {name:'数据管理'},
