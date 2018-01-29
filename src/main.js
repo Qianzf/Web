@@ -69,8 +69,11 @@ const menus = [
         {name:'发布文章'},
         {name:'文章管理'},
         {name:'文章分类'},
+        {name:'个性页面'},
+        {name:'边栏设定'},
+        {name:'模板管理'},
     ]},
-    {name:'采集数据',icon:'ios-navigate', subMenus:[
+    {name:'数据采集',icon:'ios-navigate', subMenus:[
         {name:'数据管理'},
         {name:'数据分析'},
         {name:'采集日志'},
