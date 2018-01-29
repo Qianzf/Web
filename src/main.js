@@ -13,6 +13,10 @@ import Locales from './locale';
 import zhLocale from 'iview/src/locale/lang/zh-CN';
 import enLocale from 'iview/src/locale/lang/en-US';
 
+import axios from 'axios';
+
+Vue.prototype.$http = axios;
+
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(VueI18n);
@@ -61,10 +65,26 @@ const menus = [
         {name:'个人信息'},
         {name:'我的消息'},
     ]},
-    {name:'数据信息',icon:'ios-navigate', subMenus:[
+    {name:'博客管理',icon:'ios-navigate', subMenus:[
         {name:'发布文章'},
         {name:'文章管理'},
-    ]}
+    ]},
+    {name:'采集数据',icon:'ios-navigate', subMenus:[
+        {name:'数据管理'},
+        {name:'数据分析'},
+        {name:'采集日志'},
+        {name:'计划任务'},
+    ]},
+    {name:'权限管理',icon:'ios-navigate', subMenus:[
+        {name:'用户管理'},
+        {name:'角色管理'},
+        {name:'权限管理'},
+    ]},
+    {name:'开发管理',icon:'ios-navigate', subMenus:[
+        {name:'系统参数'},
+        {name:'其它开发'},
+    ]},
+    
 ];
 
 
@@ -74,8 +94,12 @@ const store = new Vuex.Store({
             {name:'测试页面集合',link:'#'},
             {name:'测试',link:'#'},
         ],
+        // 所有的菜单项
         menus:menus,
+        // 当前激活的菜单
         activeMenu:'',
+        // 密码修改的弹出框
+        passDialog:false,
     },
     getters: {
         pagelinks:(state)=>{
@@ -86,6 +110,34 @@ const store = new Vuex.Store({
         },
         activeMenu:(state)=>{
             return state.activeMenu;
+        },
+        passDialog:(state)=>{
+            return state.passDialog;
+        },
+        currentTimeName:()=> {
+            var date = new Date();
+            var hours = date.getHours();
+            if (hours >= 0 && hours < 5) {
+                return '已经凌晨了！';
+            }
+            if (hours >= 5 && hours < 9) {
+                return '早上好！';
+            }
+            if (hours >= 9 && hours < 12) {
+                return '上午好！';
+            }
+            if (hours >= 12 && hours < 13) {
+                return '中午好！';
+            }
+            if (hours >= 13 && hours < 18) {
+                return '下午好！';
+            }
+            if (hours >= 18 && hours < 19) {
+                return '傍晚好！';
+            }
+            if (hours >= 19) {
+                return '晚上好！';
+            }
         }
     },
     mutations: {
@@ -101,6 +153,9 @@ const store = new Vuex.Store({
         },
         setActiveMenu(state, menuName){
             state.activeMenu = menuName;
+        },
+        setPassDialog(state, flag){
+            state.passDialog = flag;
         }
     },
     actions: {

@@ -12,6 +12,18 @@ fs.open('./src/config/env.js', 'w', function(err, fd) {
 
 module.exports = merge(webpackBaseConfig, {
     devtool: '#source-map',
+    devServer: {
+        proxy: {
+          // proxy all requests starting with /api to jsonplaceholder
+            '/api': {
+                target: 'http://int.dpool.sina.com.cn',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/api': ''
+                }
+            }
+        }
+    },
     output: {
         publicPath: '/dist/',
         filename: '[name].js',
@@ -31,5 +43,6 @@ module.exports = merge(webpackBaseConfig, {
             template: './src/template/index.ejs',
             inject: false
         })
-    ]
+    ],
+    
 });

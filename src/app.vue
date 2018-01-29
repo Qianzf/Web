@@ -19,16 +19,19 @@
         background: #F5F7F9;
         border-radius: 4px;
         overflow: hidden;
+        margin-bottom: 30px;
     }
     .layout-content-main{
         padding: 10px;
+        
     }
     .layout-copy{
         text-align: center;
         padding: 0px 0 10px;
         color: #9ea7b4;
-        position: relative;
+        position: absolute;
         bottom: 0px;
+        width: 100%;
     }
     .layout-menu-left{
         background: #464c5b;
@@ -70,12 +73,17 @@
         margin: 0 20px !important;
         cursor:pointer;
     }
-    .right-icons{
+    .right-icons {
         display: inline-block;
         float: right;
-        text-align: right;
         cursor:pointer;
         color: burlywood;
+    }
+    .right-icons:hover{
+        color: rgb(173, 143, 104);
+    }
+    .right-icons .name {
+        text-align: right;
     }
     .name {
         font-size: 14px;
@@ -89,7 +97,6 @@
         position: relative;
         top: -3px;
         left: 0px;
-        letter-spacing: 1px;
         font-family: Verdana;
         color: #5B6270;
     }
@@ -97,13 +104,17 @@
         width:0 !important;
         overflow: hidden;
     }
+    .ivu-row-flex {
+        position: relative;
+        
+    }
 </style>
 <template>
     <div class="layout">
         <Row type="flex">
             
             <Col :span="sideSpan" :class="sideSpan > 0?'':'no-width'" class="layout-menu-left">
-                <Menu @on-select="openLink" :active-name="active" theme="dark" width="auto" :open-names="getOpenMenus">
+                <Menu :accordion="true" @on-select="openLink" :active-name="active" theme="dark" width="auto" :open-names="getOpenMenus">
                     <div class="layout-logo-left"><Icon type="android-color-palette"></Icon> {{title}}</div>
                     <Submenu :name="menu.name" :key="index" v-for="(menu,index) in menus">
                         <template slot="title">
@@ -119,13 +130,17 @@
                 <div class="layout-header">
                     <Icon @click.native="collapsedSider" :class="rotateIcon"  type="ios-arrow-back" size="24"></Icon>
                     <span class="time">
-                        
-                        
-                        
                         {{hour}}<span :style="secFlag?'visibility: visible;':'visibility: hidden;'" >:</span>{{minute}}</span>
                     <span class="right-icons">
-                        <Icon type="person"></Icon>
-                        <span class="name">超级管理员</span>
+                        <Dropdown>
+                            <Icon type="person"></Icon>
+                            <span class="name">超级管理员</span>
+                            <DropdownMenu slot="list">
+                                <DropdownItem>个人信息</DropdownItem>
+                                <DropdownItem @click.native="openPassDialog">密码修改</DropdownItem>
+                                <DropdownItem divided>登出系统</DropdownItem>
+                            </DropdownMenu>
+                        </Dropdown>
                     </span>
                 </div>
                 <!--
@@ -140,6 +155,25 @@
                 </div>
                 <div class="layout-copy" v-html="copyright">
                 </div>
+                <Modal
+                    v-model="passDialog"
+                    title="修改密码"
+                    @on-ok="submitPass"
+                    @on-cancel="cancel">
+                    <div style="width:66%;margin:0 auto;">
+                    <p style="margin-bottom:10px;">
+                    <Input v-model="newPass" type="password">
+                        <span slot="prepend">新的密码</span>
+                    </Input>
+                    </p>
+                    <p style="margin-bottom:10px;">
+                    <Input v-model="confimPass" type="password">
+                        <span slot="prepend">确认密码</span>
+                    </Input>
+                    </p>
+                    <p style="color: #9E9E9E;">* 您的密码将被加密存储。</p>
+                    </div>
+                </Modal>
             </Col>
         </Row>
     </div>
@@ -156,7 +190,10 @@
                 contentSpan:19,
                 hour:0,
                 minute:0,
-                sec:0
+                sec:0,
+                city:'',
+                newPass:'',
+                confimPass:'',
             };
         },
         mounted() {
@@ -166,8 +203,20 @@
 
         },
         methods: {
+            submitPass(){
+                this.$store.commit('setPassDialog',false);
+            },
+            cancel(){
+                this.$store.commit('setPassDialog',false);
+            },
+            openPassDialog(){
+                this.$store.commit('setPassDialog',true);
+            },
             openLink(link){
-                this.$router.push({name: link});
+                if(typeof link == "string") {
+                    this.$router.push({name: link});
+                }
+                
             },
             collapsedSider() {
                 console.log("click");
@@ -181,6 +230,44 @@
                 that.hour = time.getHours() > 9 ? time.getHours() : '0' + time.getHours();
                 that.minute = time.getMinutes() > 9 ? time.getMinutes() : '0' + time.getMinutes();
                 that.sec = time.getSeconds();
+            },
+            getLocation(){
+               
+                var url = "/api/iplookup/iplookup.php?format=js";
+                this.$http.get(url)
+                .then(function (response) {
+                    var str = response.data.replace("var remote_ip_info = ", "");
+                    str = str.substring(0, str.length-1);
+                    var remote_ip_info = JSON.parse(str);
+                    // 当前城市
+                    console.log(remote_ip_info.city);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+                 /*
+                fetch('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js', {
+                    method: 'GET',
+                    mode: 'cors',
+                    cache: 'default'
+                }).then(function(res){
+                    console.log(res.json());
+                });
+                var url = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js";
+                fetch(url, {
+                    method: "POST",
+                    mode: "no-cors",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: ""
+                    }).then(function(res) {
+                        console.log("Response succeeded?", JSON.stringify(res.ok));
+                        console.log(JSON.stringify(res));
+                    }).catch(function(e) {
+                        console.log("fetch fail", JSON.stringify(params));
+                    });
+                 **/
             }
         },
         computed: {
@@ -206,17 +293,24 @@
                 }
                 return  res;
             },
-
             active(){
-                
                 return this.$store.getters.activeMenu;
             },
             secFlag() {
                 return (this.sec % 2 == 0);
+            },
+            passDialog:{
+                get: function () {
+                    return this.$store.getters.passDialog;
+                },
+                set: function () {
+                }
             }
+            
         },
         created () {
             this.menus = this.$store.getters.menus;
+            this.getLocation();
             var that = this;
             that.updateTime();
             setInterval(function(){
