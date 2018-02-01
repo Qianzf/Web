@@ -5,13 +5,6 @@
         border-radius: 4px;
         min-height: 580px;
     }
-    .name-p {
-        font-size: 22px;
-        color: #000;
-        padding-left: 10px;
-        border-left: 5px solid burlywood;
-        margin: 10px 0;
-    }
     .role-p {
         font-size: 14px;
         color: #fff;

@@ -9,3 +9,24 @@ body{
     margin-bottom: 11px;
 }
 
+.name-p {
+    font-size: 20px;
+    color: #455A64;
+    padding-left: 15px;
+    border-left: 5px solid burlywood;
+    margin: 10px 0;
+}
+
+.message-content {
+    height: calc(100% - 60px);
+    overflow: auto;
+    font-size: 14px;
+    padding: 6px 0;
+    color: rgba(0, 0, 0, 0.76);
+    text-indent: 2em;
+}
+
+.ivu-tabs-bar {
+    border-bottom: 1px solid #dddee1;
+    margin-bottom: 5px;
+}

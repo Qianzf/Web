@@ -14,7 +14,7 @@
     }
     .layout-content{
         min-height: 580px;
-        margin: 10px;
+        margin: 10px 15px;
         overflow: auto;
         background: #F5F7F9;
         border-radius: 4px;
@@ -65,7 +65,7 @@
         overflow: hidden;
     }
     .layout-menu-left ul {
-        width:250px !important;
+        min-width:200px !important;
     }
     .layout-header i{
         font-size: 24px !important;
@@ -102,6 +102,7 @@
         background: #464C5B;
         padding: 2px 6px;
         border-radius: 4px;
+        box-shadow: 0 0 12px #9E9E9E;
     }
     .place {
         display: inline-block;
@@ -206,8 +207,8 @@
                 copyright:"2016-2018 &copy; SCH SYSTEM.",
                 menus:null,
                 isCollapsed:false,
-                sideSpan:5,
-                contentSpan:19,
+                sideSpan:4,
+                contentSpan:20,
                 hour:0,
                 minute:0,
                 sec:0,
@@ -241,8 +242,8 @@
             collapsedSider() {
                 console.log("click");
                 this.isCollapsed = !this.isCollapsed;
-                this.sideSpan = this.sideSpan == 5 ? 0 : 5;
-                this.contentSpan = this.contentSpan == 19 ? 24 : 19;
+                this.sideSpan = this.sideSpan == 4 ? 0 : 4;
+                this.contentSpan = this.contentSpan == 20 ? 24 : 20;
             },
             updateTime(){
                 var that = this;
