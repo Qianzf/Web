@@ -82,7 +82,7 @@ const menus = [
     {name:'权限管理',icon:'ios-navigate', subMenus:[
         {name:'用户管理'},
         {name:'角色管理'},
-        {name:'权限管理'},
+        {name:'接口管理'},
     ]},
     {name:'开发管理',icon:'ios-navigate', subMenus:[
         {name:'系统参数'},
