@@ -37,6 +37,30 @@ const routers = [{
     },
     name:"文章管理",
     component: (resolve) => require(['./views/baseInfo/message.vue'], resolve)
+},
+{
+    path: '/userManage',
+    meta: {
+        title: '用户管理'
+    },
+    name:"用户管理",
+    component: (resolve) => require(['./views/auth/userList.vue'], resolve)
+},
+{
+    path: '/roleList',
+    meta: {
+        title: '角色管理'
+    },
+    name:"角色管理",
+    component: (resolve) => require(['./views/auth/roleList.vue'], resolve)
+},
+{
+    path: '/iface',
+    meta: {
+        title: '接口管理'
+    },
+    name:"接口管理",
+    component: (resolve) => require(['./views/auth/iface.vue'], resolve)
 }
 ];
 export default routers;
