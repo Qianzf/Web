@@ -98,13 +98,14 @@
             <Col span="12">
                 <Row>
                     <Card>
-                        <p slot="title">数据来源</p>
-                        <div id="main" class="graph-view"></div>
+                        <p slot="title">系统状态</p>
+                        <div id="main2" class="graph-view"></div>
                     </Card>
+                    
                 </Row>
                 <Card>
-                    <p slot="title">数据计划</p>
-                    <div id="main2" class="graph-view"></div>
+                    <p slot="title">数据来源</p>
+                    <div id="main" class="graph-view"></div>
                 </Card>
             </Col>
         </Row>

@@ -58,7 +58,6 @@
     }
     .rotate-icon{
         transform: rotate(-180deg);
-        
     }
     .ivu-col{
         transition: width .3s ease-in-out;

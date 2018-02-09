@@ -30,3 +30,34 @@ body{
     border-bottom: 1px solid #dddee1;
     margin-bottom: 5px;
 }
+.layout-content {
+
+    background: transparent !important;
+}
+.layout-header {
+    background: transparent !important;
+}
+.layout {
+    background: transparent !important;
+}
+.layout {
+    background-position: center top;
+    background-size: cover;
+}
+.layout::after {
+    background-image: url("../img/bg.gif") !important;
+    background-attachment: fixed;
+    -webkit-filter: blur(7px);
+    -moz-filter: blur(7px);
+    -ms-filter: blur(7px);
+    -o-filter: blur(7px);
+    filter: blur(7px);
+    content: ''; 
+    position: absolute; 
+    top: 0; 
+    right: 0; 
+    bottom: 0; 
+    left: 0;
+    z-index: -1;
+    margin: -30px;
+}
