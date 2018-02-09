@@ -25,7 +25,7 @@
     .left{  
         height: 100%;
         margin-right: 20px;
-        box-shadow: 3px 0px 6px rgba(0, 0, 0, 0.12);
+        box-shadow: 3px 0px 6px rgba(0, 0, 0, 0.18);
         transition: all 0.3s ease-in-out;
         overflow: hidden;
         position: absolute;
@@ -75,8 +75,8 @@
 </style>
 <template>
     <div class="person-info-block">
-        <p class="name-p">删除、添加或者修改网站用户信息。</p>
-        <p class="role-p"><Icon type="person-stalker"></Icon>  轻松管理用户信息 </p>
+        <p class="name-p">轻松管理用户信息。</p>
+        <p class="role-p"><Icon type="person-stalker"></Icon> 删除、添加或者修改网站用户信息 </p>
         <div class="container">
             <div class="left" :style="leftBar?'':'transform: translate(-402px, 0px);'">
                 <div class="search-block">
@@ -116,7 +116,7 @@
                     </div>
                     <Table stripe :columns="columns1" :data="data1"></Table>
                     <div style="margin-top:12px;text-align:right;">
-                        <Page :total="40" size="small" show-elevator show-sizer></Page>
+                        <Page :total="40" size="small" placement="top" show-elevator show-sizer></Page>
                     </div>
                     
             </div>
