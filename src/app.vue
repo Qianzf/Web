@@ -125,13 +125,37 @@
         position: relative;
         
     }
+
+    .ivu-menu-vertical.ivu-menu-light:after {
+        display: none;
+    }
+    .layout-menu-left {
+        background-color: transparent;
+        box-shadow:inset 0px 0px 3px 0px #bbbec4;
+    }
+    .ivu-menu-light {
+        background-color: transparent;
+    }
+
+    .layout-logo-left[data-v-bced26ea] {
+        width: 90%;
+        height: 30px;
+        background: transparent;
+        border-radius: 3px;
+        margin: 15px auto;
+        line-height: 30px;
+        color: #444;
+        text-align: center;
+        font-size: 16px;
+    }
+
 </style>
 <template>
     <div class="layout">
         <Row type="flex">
             
             <Col :span="sideSpan" :class="sideSpan > 0?'':'no-width'" class="layout-menu-left">
-                <Menu :accordion="true" @on-select="openLink" :active-name="active" theme="dark" width="auto" :open-names="getOpenMenus">
+                <Menu :accordion="true" @on-select="openLink" :active-name="active" theme="light" width="auto" :open-names="getOpenMenus">
                     <div class="layout-logo-left"><Icon type="android-color-palette"></Icon> {{title}}</div>
                     <Submenu :name="menu.name" :key="index" v-for="(menu,index) in menus">
                         <template slot="title">
@@ -239,8 +263,13 @@
                 
             },
             collapsedSider() {
-                console.log("click");
+                
                 this.isCollapsed = !this.isCollapsed;
+                if (this.isCollapsed) {
+                    localStorage.__isCollapsed = "true";
+                } else {
+                    localStorage.__isCollapsed = "false";
+                }
                 this.sideSpan = this.sideSpan == 4 ? 0 : 4;
                 this.contentSpan = this.contentSpan == 20 ? 24 : 20;
             },
@@ -337,6 +366,10 @@
             setInterval(function(){
                 that.updateTime();
             },1000);
+            if (localStorage.__isCollapsed == "true") {
+                this.collapsedSider();
+            }
+            
         }
     };
 </script>
